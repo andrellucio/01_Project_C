@@ -1,0 +1,34 @@
+// Inclui a biblioteca do sensor de temperatura
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+
+// Define o pino ao qual o sensor de temperatura está conectado
+#define DHTPIN 2         
+
+// Define o tipo de sensor de temperatura utilizado (DHT22)
+#define DHTTYPE DHT22     
+
+// Cria uma instância do sensor de temperatura
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  // Lê a temperatura e umidade do sensor
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  // Imprime os valores lidos no monitor serial
+  Serial.print("Temperatura: ");
+  Serial.print(temperature);
+  Serial.print(" °C\t");
+  Serial.print("Umidade: ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  // Espera 2 segundos antes de fazer uma nova leitura
+  delay(2000);
+}
